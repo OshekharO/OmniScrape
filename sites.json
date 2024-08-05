@@ -1,0 +1,55 @@
+{
+  "movies": {
+    "Levidia": {
+      "name": "Levidia",
+      "baseUrl": "https://www.levidia.ch",
+      "url": "https://www.levidia.ch/search.php?q=",
+      "main": "ul.mfeed li",
+      "title": "div.mcont div.mainlink a",
+      "img": "a img[src]",
+      "href": "a[href]"
+    },
+    "MkvCinemas": {
+      "name": "MkvCinemas",
+      "baseUrl": "https://mkvcinemas.bet",
+      "url": "https://mkvcinemas.bet/?s=",
+      "main": "div.movies-list div.ml-item",
+      "title": "a span.mli-info h2",
+      "img": "a img[src]",
+      "href": "a[href]"
+    }
+  },
+  "asian": {
+    "Asianc": {
+      "name": "Asianc",
+      "baseUrl": "https://asianc.sh",
+      "url": "https://asianc.sh/search?type=movies&keyword=",
+      "main": "ul.switch-block li",
+      "title": "a h3",
+      "img": "a img[src]",
+      "href": "a[href]"
+    }
+  },
+  "anime": {
+    "GoGoAnime": {
+      "name": "GoGo Anime",
+      "baseUrl": "https://ww9.gogoanimes.fi",
+      "url": "https://ww9.gogoanimes.fi/search.html?keyword=",
+      "main": "ul.items li",
+      "title": "p.name a",
+      "img": "div.img a img[src]",
+      "href": "div.img a[href]"
+    }
+  },
+  "novel": {
+    "BestLightNovel": {
+      "name": "Best Light Novel",
+      "baseUrl": "https://bestlightnovel.com",
+      "url": "https://bestlightnovel.com/search_novels/",
+      "main": "div.update_item",
+      "title": "h3 a",
+      "img": "img[src]",
+      "href": "h3 a[href]"
+    }
+  }
+}
