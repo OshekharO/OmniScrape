@@ -60,14 +60,14 @@
       "img": "img[src]",
       "href": "h3 a[href]"
     },
-    "飞速中文": {
-      "name": "飞速中文",
-      "baseUrl": "https://m.feisxs.com",
-      "url": "https://m.feisxs.com/search.aspx?s=",
-      "main": "div.cover div.nlist",
-      "title": "div.nbox h3 a",
-      "img": "div.nimg a img[src]",
-      "href": "div.nbox h3 a[href]"
+    "稷下書院": {
+      "name": "稷下書院",
+      "baseUrl": "https://www.novel543.com",
+      "url": "https://www.novel543.com/search/",
+      "main": "ul.list li.media",
+      "title": "div.media-content h3 a",
+      "img": "div.media-left a img",
+      "href": "div.media-content h3 a[href]"
     }
   }
 }
