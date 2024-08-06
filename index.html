@@ -194,8 +194,8 @@
           results.forEach((result) => {
             const col = $(`
             <div class="col-md-4 mb-3">
-              <div class="card bg-dark text-light">
-                <img src="${result.img}" class="card-img-top" alt="${result.title}">
+              <div class="card bg-dark text-light border-danger">
+                <img src="${result.img}" class="card-img-top" alt="${result.title}" loading="lazy">
                 <div class="card-body">
                   <h5 class="card-title">${result.title}</h5>
                   <a href="${result.href}" class="btn btn-primary" target="_blank">View</a>
