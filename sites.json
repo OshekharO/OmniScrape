@@ -37,6 +37,15 @@
       "title": "a h3",
       "img": "a img[src]",
       "href": "a[href]"
+    },
+    "MkvDrama": {
+      "name": "MkvDrama",
+      "baseUrl": "https://stream.mkvdrama.org",
+      "url": "https://stream.mkvdrama.org/search.html?keyword=",
+      "main": "div.drama-item",
+      "title": "b",
+      "img": "img[src]",
+      "href": "a[href]"
     }
   },
   "anime": {
