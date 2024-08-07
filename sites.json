@@ -26,6 +26,15 @@
       "title": "div.inside-article header.entry-header h2 a",
       "img": "div.inside-article div.post-image a img[src]",
       "href": "div.inside-article div.post-image a[href]"
+    },
+    "FilmyHub": {
+      "name": "FilmyHub",
+      "baseUrl": "https://afilmyhub.mom",
+      "url": "https://afilmyhub.mom/site-search.html?to-search=",
+      "main": "div.container article.post",
+      "title": "h3 a",
+      "img": "img[src]",
+      "href": "a[href]"
     }
   },
   "asian": {
