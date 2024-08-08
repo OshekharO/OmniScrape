@@ -18,15 +18,6 @@
       "img": "a img[src]",
       "href": "a[href]"
     },
-    "HdMovieHubs": {
-      "name": "HdMovieHubs",
-      "baseUrl": "https://hdmoviehubs.org",
-      "url": "https://hdmoviehubs.org/?s=",
-      "main": "article.post",
-      "title": "div.inside-article header.entry-header h2 a",
-      "img": "div.inside-article div.post-image a img[src]",
-      "href": "div.inside-article div.post-image a[href]"
-    },
     "FilmyHub": {
       "name": "FilmyHub",
       "baseUrl": "https://afilmyhub.mom",
@@ -45,15 +36,6 @@
       "main": "ul.switch-block li",
       "title": "a h3",
       "img": "a img[src]",
-      "href": "a[href]"
-    },
-    "MkvDrama": {
-      "name": "MkvDrama",
-      "baseUrl": "https://stream.mkvdrama.org",
-      "url": "https://stream.mkvdrama.org/search.html?keyword=",
-      "main": "div.drama-item",
-      "title": "b",
-      "img": "img[src]",
       "href": "a[href]"
     }
   },
