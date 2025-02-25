@@ -1,11 +1,11 @@
 {
   "movies": {
     "Levidia": {
-      "name": "Levidia",
-      "baseUrl": "https://www.levidia.ch",
-      "url": "https://www.levidia.ch/search.php?q=",
-      "main": "ul.mfeed li",
-      "title": "div.mcont div.mainlink a",
+      "name": "Prmovies",
+      "baseUrl": "https://prmovies.taxi",
+      "url": "https://prmovies.taxi/?s=",
+      "main": "div.movies-list div.ml-item",
+      "title": "h2",
       "img": "a img[src]",
       "href": "a[href]"
     },
