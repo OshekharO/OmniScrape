@@ -25,60 +25,472 @@
   <meta property="twitter:image" content="https://uncoder.eu.org/images/omniscrape-twitter.jpg" />
 
   <meta name="copyright" content="Copyright © 2024 OshekharO" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+  
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
+    :root {
+      --primary-color: #4361ee;
+      --primary-dark: #3a56d4;
+      --secondary-color: #3f37c9;
+      --accent-color: #7209b7;
+      --success-color: #4cc9f0;
+      --warning-color: #f8961e;
+      --error-color: #f72585;
+      --light-color: #f8f9fa;
+      --dark-color: #1a1a1a;
+      --gray-color: #6c757d;
+      --light-gray: #2d2d2d;
+      --border-color: #444;
+      --border-radius: 12px;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      --transition: all 0.3s ease;
+    }
+
+    [data-theme="light"] {
+      --primary-color: #4361ee;
+      --secondary-color: #3f37c9;
+      --accent-color: #7209b7;
+      --light-color: #ffffff;
+      --dark-color: #212529;
+      --gray-color: #6c757d;
+      --light-gray: #f8f9fa;
+      --border-color: #dee2e6;
+      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    * {
+      font-family: 'Inter', sans-serif;
+    }
+
     body {
-      font-family: Inter, sans-serif;
-      font-weight: 300;
-      font-size: 16px;
-      line-height: 1.6;
-      color: #616370;
-      background: #26272c;
+      background: linear-gradient(135deg, var(--dark-color) 0%, #2d2d2d 100%);
+      min-height: 100vh;
+      color: var(--light-color);
+      transition: var(--transition);
+    }
+
+    .main-container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    .header-section {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      color: white;
+      border-radius: var(--border-radius);
+      padding: 3rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--box-shadow);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .header-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 1000,50 1000,100 0,100"/></svg>');
+      background-size: cover;
+    }
+
+    .header-section h1 {
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      font-size: 3rem;
+      position: relative;
+    }
+
+    .header-section .subtitle {
+      opacity: 0.9;
+      font-size: 1.2rem;
+      margin-bottom: 0;
+      position: relative;
+    }
+
+    .search-section {
+      background: var(--light-gray);
+      border-radius: var(--border-radius);
+      padding: 2rem;
+      box-shadow: var(--box-shadow);
+      margin-bottom: 2rem;
+      border: 1px solid var(--border-color);
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .form-control, .form-select {
+      background-color: var(--dark-color);
+      border: 2px solid var(--border-color);
+      color: var(--light-color);
+      border-radius: var(--border-radius);
+      padding: 0.75rem 1rem;
+      transition: var(--transition);
+    }
+
+    .form-control:focus, .form-select:focus {
+      background-color: var(--dark-color);
+      border-color: var(--primary-color);
+      color: var(--light-color);
+      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
+    }
+
+    .btn-primary-custom {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-primary-custom:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+    }
+
+    .results-section {
+      margin-top: 2rem;
+    }
+
+    .website-results {
+      background: var(--light-gray);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .website-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .website-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+    }
+
+    .website-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--light-color);
       margin: 0;
+    }
+
+    .result-card {
+      background: var(--dark-color);
+      border: 1px solid var(--border-color);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      transition: var(--transition);
+      height: 100%;
+    }
+
+    .result-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+      border-color: var(--primary-color);
+    }
+
+    .card-img-container {
+      position: relative;
+      overflow: hidden;
+      height: 250px;
+    }
+
+    .card-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: var(--transition);
+    }
+
+    .result-card:hover .card-img {
+      transform: scale(1.05);
+    }
+
+    .card-body-custom {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .card-title {
+      font-weight: 600;
+      color: var(--light-color);
+      margin-bottom: 1rem;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card-btn {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 0.75rem 1.5rem;
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: var(--transition);
+      margin-top: auto;
+      text-align: center;
+    }
+
+    .card-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
+      color: white;
+    }
+
+    .loading-section {
+      text-align: center;
+      padding: 3rem;
+    }
+
+    .spinner-custom {
+      width: 3rem;
+      height: 3rem;
+      border-width: 0.3em;
+      color: var(--primary-color);
+    }
+
+    .loading-text {
+      margin-top: 1rem;
+      color: var(--gray-color);
+      font-size: 1.1rem;
+    }
+
+    .stats-section {
+      background: var(--light-gray);
+      border-radius: var(--border-radius);
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      box-shadow: var(--box-shadow);
+      border: 1px solid var(--border-color);
+    }
+
+    .stat-item {
+      text-align: center;
       padding: 1rem;
     }
-    .container {
-      max-width: 100%;
-      padding: 0 1rem;
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      margin-bottom: 0.5rem;
     }
-    .alert {
+
+    .stat-label {
+      color: var(--gray-color);
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .alert-custom {
+      border-radius: var(--border-radius);
       border: none;
-      color: #fff;
+      padding: 1rem 1.5rem;
+      margin-bottom: 1rem;
     }
-    .alert-success { background-color: #28a745; }
-    .alert-warning { background-color: #ffc107; color: #000; }
-    .alert-danger { background-color: #dc3545; }
-    #loading { margin: 2rem 0; }
-    .card img { object-fit: cover; height: 200px; width: 100%; }
-    @media (min-width: 768px) { .card img { height: 250px; } }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .theme-btn {
+      background: var(--primary-color);
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      box-shadow: var(--box-shadow);
+    }
+
+    .theme-btn:hover {
+      transform: rotate(180deg);
+      background: var(--secondary-color);
+    }
+
+    .footer-section {
+      text-align: center;
+      padding: 2rem 0;
+      color: var(--gray-color);
+      border-top: 1px solid var(--border-color);
+      margin-top: 3rem;
+    }
+
+    @media (max-width: 768px) {
+      .header-section {
+        padding: 2rem 1rem;
+      }
+
+      .header-section h1 {
+        font-size: 2rem;
+      }
+
+      .search-section {
+        padding: 1.5rem;
+      }
+
+      .website-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 0.5rem;
+      }
+
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+      }
+
+      .theme-btn {
+        width: 40px;
+        height: 40px;
+      }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.5s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
-<body>
-  <div class="container mt-4">
-    <h1 class="fs-2 fw-bold mb-4 text-uppercase text-center text-light">OmniScrape</h1>
+<body data-theme="dark">
+  <!-- Theme Toggle -->
+  <div class="theme-toggle">
+    <button class="theme-btn" id="themeToggle" title="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </button>
+  </div>
 
-    <div class="row justify-content-center mb-3">
-      <div class="col-12 col-md-8">
-        <div class="mb-3">
-          <label for="categorySelect" class="form-label fs-7 font-monospace badge bg-danger text-light">Category</label>
-          <select id="categorySelect" class="form-select mb-3" aria-label="Select category">
+  <div class="container main-container py-4">
+    <!-- Header Section -->
+    <div class="header-section">
+      <h1><i class="fas fa-search me-3"></i>OmniScrape</h1>
+      <p class="subtitle">Multi-Website Search Tool</p>
+    </div>
+
+    <!-- Search Section -->
+    <div class="search-section fade-in">
+      <div class="row g-4">
+        <div class="col-12 col-md-6">
+          <label for="categorySelect" class="form-label">
+            <i class="fas fa-folder"></i>Category
+          </label>
+          <select id="categorySelect" class="form-select">
             <option value="all">All Categories</option>
           </select>
         </div>
-        <div class="mb-3">
-          <label for="searchInput" class="form-label fs-7 font-monospace badge bg-danger text-light">Search Term</label>
-          <input type="text" class="form-control mb-3" id="searchInput" placeholder="Enter search term" aria-label="Enter search term" />
+        <div class="col-12 col-md-6">
+          <label for="searchInput" class="form-label">
+            <i class="fas fa-search"></i>Search Term
+          </label>
+          <input type="text" class="form-control" id="searchInput" placeholder="Enter your search term..." />
         </div>
-        <button id="searchButton" class="btn btn-primary mb-3" aria-label="Search websites for term">Search</button>
-
-        <div id="loading" class="text-center text-light d-none" role="status" aria-live="polite">
-          <div class="spinner-border text-danger" role="status"></div>
-          <span class="visually-hidden">Fetching results...</span>
+        <div class="col-12">
+          <button id="searchButton" class="btn btn-primary-custom">
+            <i class="fas fa-search me-2"></i>Search Websites
+          </button>
         </div>
-
-        <div id="results" class="mt-4"></div>
       </div>
     </div>
+
+    <!-- Stats Section -->
+    <div class="stats-section fade-in d-none" id="statsSection">
+      <div class="row text-center">
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number" id="totalWebsites">0</div>
+            <div class="stat-label">Websites</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number" id="totalResults">0</div>
+            <div class="stat-label">Results</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number" id="successfulSearches">0</div>
+            <div class="stat-label">Successful</div>
+          </div>
+        </div>
+        <div class="col-6 col-md-3">
+          <div class="stat-item">
+            <div class="stat-number" id="failedSearches">0</div>
+            <div class="stat-label">Failed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading Section -->
+    <div id="loading" class="loading-section d-none">
+      <div class="spinner-border spinner-custom" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <div class="loading-text">Searching websites...</div>
+    </div>
+
+    <!-- Results Section -->
+    <div id="results" class="results-section"></div>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+      <p class="mb-2">OmniScrape Multi-Search Tool</p>
+      <p class="mb-0 text-muted">© 2024 OshekharO | Uncoder.eu.org</p>
+    </footer>
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.1.min.js" crossorigin="anonymous"></script>
@@ -86,25 +498,74 @@
     let websites = {};
     const corsBypassUrl = "https://cors-bypasser-gilt.vercel.app/fetchdata?url=";
 
+    // Theme management
+    function initTheme() {
+      const savedTheme = localStorage.getItem('theme') || 'dark';
+      document.body.setAttribute('data-theme', savedTheme);
+      updateThemeIcon(savedTheme);
+    }
+
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      document.body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      updateThemeIcon(newTheme);
+    }
+
+    function updateThemeIcon(theme) {
+      const icon = $('#themeToggle i');
+      icon.removeClass('fa-moon fa-sun');
+      icon.addClass(theme === 'dark' ? 'fa-sun' : 'fa-moon');
+      $('#themeToggle').attr('title', `Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`);
+    }
+
     $(document).ready(function () {
+      initTheme();
+      
+      $('#themeToggle').click(toggleTheme);
+
+      // Load website configuration
       $.getJSON("sites.json", data => {
         websites = data;
         populateCategorySelect();
-      }).fail(() => alert("Failed to load site configuration."));
+      }).fail(() => {
+        showAlert('Failed to load site configuration. Please refresh the page.', 'danger');
+      });
 
+      // Search button click handler
       $("#searchButton").click(() => {
         const searchTerm = $("#searchInput").val().trim();
         const category = $("#categorySelect").val();
-        if (!searchTerm) { alert("Please enter a search term!"); return; }
+        
+        if (!searchTerm) {
+          showAlert('Please enter a search term!', 'warning');
+          return;
+        }
+        
         searchWebsites(searchTerm, category);
+      });
+
+      // Enter key support
+      $("#searchInput").keypress(function(e) {
+        if (e.which === 13) {
+          $("#searchButton").click();
+        }
       });
     });
 
     function populateCategorySelect() {
       const select = $("#categorySelect");
+      select.empty().append('<option value="all">All Categories</option>');
+      
       Object.keys(websites).forEach(category => {
+        const categoryName = category.replace(/\b\w/g, c => c.toUpperCase());
+        const siteCount = Object.keys(websites[category]).length;
         select.append(
-          $("<option>", { value: category, text: category.replace(/\b\w/g, c => c.toUpperCase()) })
+          $("<option>", { 
+            value: category, 
+            text: `${categoryName} (${siteCount} sites)`
+          })
         );
       });
     }
@@ -112,85 +573,208 @@
     function searchWebsites(searchTerm, category) {
       $("#results").empty();
       $("#loading").removeClass("d-none");
+      $("#statsSection").addClass("d-none");
 
       const categoriesToSearch = category === "all" ? Object.keys(websites) : [category];
       const promises = [];
+      let totalWebsites = 0;
 
       categoriesToSearch.forEach(cat => {
         Object.values(websites[cat]).forEach(website => {
+          totalWebsites++;
           const searchUrl = website.url + encodeURIComponent(searchTerm);
           const bypassUrl = corsBypassUrl + encodeURIComponent(searchUrl);
 
-          const request = $.ajax({ url: bypassUrl, method: "GET" })
-            .then(data => ({ website, data }))
-            .catch(err => ({ website, data: null, error: err }));
+          const request = $.ajax({ 
+            url: bypassUrl, 
+            method: "GET",
+            timeout: 10000
+          })
+            .then(data => ({ website, data, success: true }))
+            .catch(err => ({ website, data: null, error: err, success: false }));
 
           promises.push(request);
         });
       });
 
-      Promise.all(promises).then(results => {
-        results.forEach(res => {
-          if (res.data) {
-            displayResults(res.website.name, parseResults(res.data, res.website));
+      // Update stats
+      $('#totalWebsites').text(totalWebsites);
+
+      Promise.allSettled(promises).then(results => {
+        let totalResults = 0;
+        let successfulSearches = 0;
+        let failedSearches = 0;
+
+        results.forEach(result => {
+          if (result.status === 'fulfilled') {
+            const res = result.value;
+            if (res.success && res.data) {
+              successfulSearches++;
+              const parsedResults = parseResults(res.data, res.website);
+              totalResults += parsedResults.length;
+              displayResults(res.website, parsedResults);
+            } else {
+              failedSearches++;
+              displayError(res.website.name, res.error);
+            }
           } else {
-            displayResults(res.website.name, []);
-            $("#results").append(`<p class="alert alert-danger">Failed to fetch from ${res.website.name}</p>`);
+            failedSearches++;
+            displayError('Unknown website', result.reason);
           }
         });
+
+        // Update stats
+        $('#totalResults').text(totalResults);
+        $('#successfulSearches').text(successfulSearches);
+        $('#failedSearches').text(failedSearches);
+        $('#statsSection').removeClass('d-none');
+
         $("#loading").addClass("d-none");
+
+        if (totalResults === 0) {
+          showAlert('No results found for your search term. Try a different keyword or category.', 'info');
+        }
       });
     }
 
     function parseResults(html, website) {
-      const doc = new DOMParser().parseFromString(html, "text/html");
-      const items = doc.querySelectorAll(website.main);
-      const results = [];
+      try {
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const items = doc.querySelectorAll(website.main);
+        const results = [];
 
-      items.forEach(item => {
-        const titleElement = item.querySelector(website.title);
-        const imgElement = item.querySelector(website.img);
-        const hrefElement = item.querySelector(website.href);
+        items.forEach(item => {
+          const titleElement = item.querySelector(website.title);
+          const imgElement = item.querySelector(website.img);
+          const hrefElement = item.querySelector(website.href);
 
-        if (titleElement && hrefElement) {
-          let imgSrc = imgElement?.getAttribute("src") || imgElement?.getAttribute("data-src") || imgElement?.getAttribute("data-original") || "https://via.placeholder.com/300x400?text=No+Image";
-          let href = hrefElement.getAttribute("href");
+          if (titleElement && hrefElement) {
+            let imgSrc = imgElement?.getAttribute("src") || 
+                         imgElement?.getAttribute("data-src") || 
+                         imgElement?.getAttribute("data-original") || 
+                         "https://via.placeholder.com/300x400/2d2d2d/616370?text=No+Image";
+            
+            let href = hrefElement.getAttribute("href");
 
-          if (href && !href.startsWith("http")) href = website.baseUrl + (href.startsWith("/") ? "" : "/") + href;
-          if (imgSrc && !imgSrc.startsWith("http")) imgSrc = website.baseUrl + (imgSrc.startsWith("/") ? "" : "/") + imgSrc;
+            // Fix relative URLs
+            if (href && !href.startsWith("http")) {
+              href = website.baseUrl + (href.startsWith("/") ? "" : "/") + href;
+            }
+            if (imgSrc && !imgSrc.startsWith("http")) {
+              imgSrc = website.baseUrl + (imgSrc.startsWith("/") ? "" : "/") + imgSrc;
+            }
 
-          results.push({ title: titleElement.textContent.trim(), img: imgSrc, href });
-        }
-      });
-      return results;
+            results.push({ 
+              title: titleElement.textContent.trim(), 
+              img: imgSrc, 
+              href 
+            });
+          }
+        });
+        return results.slice(0, 12); // Limit to 12 results per website
+      } catch (error) {
+        console.error('Error parsing results:', error);
+        return [];
+      }
     }
 
-    function displayResults(websiteName, results) {
+    function displayResults(website, results) {
       const container = $("#results");
-      const section = $(`<section class="mb-4"><h2 class="text-light">${websiteName}</h2></section>`);
+      
+      const websiteSection = $(`
+        <div class="website-results fade-in">
+          <div class="website-header">
+            <div class="website-icon">${website.name.charAt(0)}</div>
+            <h3 class="website-title">${website.name}</h3>
+            <span class="badge bg-primary ms-auto">${results.length} results</span>
+          </div>
+          <div class="row g-3" id="results-${website.name.replace(/\s+/g, '-')}"></div>
+        </div>
+      `);
 
-      if (!results.length) {
-        section.append('<p class="alert alert-warning">No results found.</p>');
+      const resultsContainer = websiteSection.find(`#results-${website.name.replace(/\s+/g, '-')}`);
+
+      if (results.length === 0) {
+        resultsContainer.html(`
+          <div class="col-12">
+            <div class="alert alert-warning alert-custom">
+              <i class="fas fa-exclamation-triangle me-2"></i>
+              No results found on ${website.name}
+            </div>
+          </div>
+        `);
       } else {
-        const row = $('<div class="row"></div>');
-        results.forEach(r => {
+        results.forEach(result => {
           const col = $(`
-            <div class="col-12 col-sm-6 col-md-4 mb-3">
-              <div class="card bg-dark text-light border-danger h-100">
-                <img src="${r.img}" class="card-img-top" alt="${r.title}" loading="lazy">
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">${r.title}</h5>
-                  <a href="${r.href}" class="btn btn-primary mt-auto" target="_blank" rel="noopener noreferrer">View</a>
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+              <div class="result-card">
+                <div class="card-img-container">
+                  <img src="${result.img}" class="card-img" alt="${result.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400/2d2d2d/616370?text=Image+Error'">
+                </div>
+                <div class="card-body-custom">
+                  <h5 class="card-title">${result.title}</h5>
+                  <a href="${result.href}" class="card-btn" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt me-2"></i>View
+                  </a>
                 </div>
               </div>
             </div>
           `);
-          row.append(col);
+          resultsContainer.append(col);
         });
-        section.append(row);
       }
 
-      container.append(section);
+      container.append(websiteSection);
+    }
+
+    function displayError(websiteName, error) {
+      const container = $("#results");
+      container.append(`
+        <div class="website-results fade-in">
+          <div class="website-header">
+            <div class="website-icon">!</div>
+            <h3 class="website-title">${websiteName}</h3>
+          </div>
+          <div class="alert alert-danger alert-custom">
+            <i class="fas fa-exclamation-circle me-2"></i>
+            Failed to fetch results from ${websiteName}. The site might be temporarily unavailable.
+          </div>
+        </div>
+      `);
+    }
+
+    function showAlert(message, type) {
+      const alertClass = {
+        'success': 'alert-success',
+        'warning': 'alert-warning',
+        'danger': 'alert-danger',
+        'info': 'alert-info'
+      }[type] || 'alert-info';
+
+      const alert = $(`
+        <div class="alert ${alertClass} alert-custom alert-dismissible fade show" role="alert">
+          <i class="fas fa-${getAlertIcon(type)} me-2"></i>
+          ${message}
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+        </div>
+      `);
+
+      $("#results").prepend(alert);
+
+      // Auto-dismiss after 5 seconds
+      setTimeout(() => {
+        alert.alert('close');
+      }, 5000);
+    }
+
+    function getAlertIcon(type) {
+      const icons = {
+        'success': 'check-circle',
+        'warning': 'exclamation-triangle',
+        'danger': 'exclamation-circle',
+        'info': 'info-circle'
+      };
+      return icons[type] || 'info-circle';
     }
   </script>
 </body>
