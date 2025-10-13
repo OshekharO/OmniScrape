@@ -26,470 +26,163 @@
 
   <meta name="copyright" content="Copyright © 2024 OshekharO" />
   
-  <!-- Bootstrap 5 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              300: '#93c5fd',
+              400: '#60a5fa',
+              500: '#3b82f6',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            },
+            dark: {
+              50: '#f8fafc',
+              100: '#f1f5f9',
+              200: '#e2e8f0',
+              300: '#cbd5e1',
+              400: '#94a3b8',
+              500: '#64748b',
+              600: '#475569',
+              700: '#334155',
+              800: '#1e293b',
+              900: '#0f172a',
+            }
+          },
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out',
+            'float': 'float 6s ease-in-out infinite',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(20px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+          },
+        },
+      },
+    }
+  </script>
   
   <style>
-    :root {
-      --primary-color: #4361ee;
-      --primary-dark: #3a56d4;
-      --secondary-color: #3f37c9;
-      --accent-color: #7209b7;
-      --success-color: #4cc9f0;
-      --warning-color: #f8961e;
-      --error-color: #f72585;
-      --light-color: #f8f9fa;
-      --dark-color: #1a1a1a;
-      --gray-color: #6c757d;
-      --light-gray: #2d2d2d;
-      --border-color: #444;
-      --border-radius: 12px;
-      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      --transition: all 0.3s ease;
+    /* Custom scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
     }
-
-    [data-theme="light"] {
-      --primary-color: #4361ee;
-      --secondary-color: #3f37c9;
-      --accent-color: #7209b7;
-      --light-color: #ffffff;
-      --dark-color: #212529;
-      --gray-color: #6c757d;
-      --light-gray: #f8f9fa;
-      --border-color: #dee2e6;
-      --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    ::-webkit-scrollbar-track {
+      background: #f1f5f9;
     }
-
-    * {
-      font-family: 'Inter', sans-serif;
+    .dark ::-webkit-scrollbar-track {
+      background: #1e293b;
     }
-
-    body {
-      background: linear-gradient(135deg, var(--dark-color) 0%, #2d2d2d 100%);
-      min-height: 100vh;
-      color: var(--light-color);
-      transition: var(--transition);
+    ::-webkit-scrollbar-thumb {
+      background: #3b82f6;
+      border-radius: 10px;
     }
-
-    .main-container {
-      max-width: 1400px;
-      margin: 0 auto;
-    }
-
-    .header-section {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      color: white;
-      border-radius: var(--border-radius);
-      padding: 3rem 2rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--box-shadow);
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .header-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 100" fill="rgba(255,255,255,0.1)"><polygon points="0,0 1000,50 1000,100 0,100"/></svg>');
-      background-size: cover;
-    }
-
-    .header-section h1 {
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      font-size: 3rem;
-      position: relative;
-    }
-
-    .header-section .subtitle {
-      opacity: 0.9;
-      font-size: 1.2rem;
-      margin-bottom: 0;
-      position: relative;
-    }
-
-    .search-section {
-      background: var(--light-gray);
-      border-radius: var(--border-radius);
-      padding: 2rem;
-      box-shadow: var(--box-shadow);
-      margin-bottom: 2rem;
-      border: 1px solid var(--border-color);
-    }
-
-    .form-label {
-      font-weight: 600;
-      color: var(--primary-color);
-      margin-bottom: 0.5rem;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .form-control, .form-select {
-      background-color: var(--dark-color);
-      border: 2px solid var(--border-color);
-      color: var(--light-color);
-      border-radius: var(--border-radius);
-      padding: 0.75rem 1rem;
-      transition: var(--transition);
-    }
-
-    .form-control:focus, .form-select:focus {
-      background-color: var(--dark-color);
-      border-color: var(--primary-color);
-      color: var(--light-color);
-      box-shadow: 0 0 0 0.25rem rgba(67, 97, 238, 0.25);
-    }
-
-    .btn-primary-custom {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      border: none;
-      border-radius: var(--border-radius);
-      padding: 0.75rem 2rem;
-      font-weight: 600;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .btn-primary-custom:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
-    }
-
-    .results-section {
-      margin-top: 2rem;
-    }
-
-    .website-results {
-      background: var(--light-gray);
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--box-shadow);
-      border: 1px solid var(--border-color);
-    }
-
-    .website-header {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: 1rem;
-      border-bottom: 2px solid var(--border-color);
-    }
-
-    .website-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-weight: bold;
-    }
-
-    .website-title {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: var(--light-color);
-      margin: 0;
-    }
-
-    .result-card {
-      background: var(--dark-color);
-      border: 1px solid var(--border-color);
-      border-radius: var(--border-radius);
-      overflow: hidden;
-      transition: var(--transition);
-      height: 100%;
-    }
-
-    .result-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-      border-color: var(--primary-color);
-    }
-
-    .card-img-container {
-      position: relative;
-      overflow: hidden;
-      height: 250px;
-    }
-
-    .card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition);
-    }
-
-    .result-card:hover .card-img {
-      transform: scale(1.05);
-    }
-
-    .card-body-custom {
-      padding: 1.5rem;
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-    }
-
-    .card-title {
-      font-weight: 600;
-      color: var(--light-color);
-      margin-bottom: 1rem;
-      line-height: 1.4;
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-
-    .card-btn {
-      background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
-      border: none;
-      border-radius: var(--border-radius);
-      padding: 0.75rem 1.5rem;
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      margin-top: auto;
-      text-align: center;
-    }
-
-    .card-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(67, 97, 238, 0.4);
-      color: white;
-    }
-
-    .loading-section {
-      text-align: center;
-      padding: 3rem;
-    }
-
-    .spinner-custom {
-      width: 3rem;
-      height: 3rem;
-      border-width: 0.3em;
-      color: var(--primary-color);
-    }
-
-    .loading-text {
-      margin-top: 1rem;
-      color: var(--gray-color);
-      font-size: 1.1rem;
-    }
-
-    .stats-section {
-      background: var(--light-gray);
-      border-radius: var(--border-radius);
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: var(--box-shadow);
-      border: 1px solid var(--border-color);
-    }
-
-    .stat-item {
-      text-align: center;
-      padding: 1rem;
-    }
-
-    .stat-number {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--primary-color);
-      margin-bottom: 0.5rem;
-    }
-
-    .stat-label {
-      color: var(--gray-color);
-      font-size: 0.9rem;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .alert-custom {
-      border-radius: var(--border-radius);
-      border: none;
-      padding: 1rem 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    .theme-btn {
-      background: var(--primary-color);
-      border: none;
-      border-radius: 50%;
-      width: 50px;
-      height: 50px;
-      color: white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      transition: var(--transition);
-      box-shadow: var(--box-shadow);
-    }
-
-    .theme-btn:hover {
-      transform: rotate(180deg);
-      background: var(--secondary-color);
-    }
-
-    .footer-section {
-      text-align: center;
-      padding: 2rem 0;
-      color: var(--gray-color);
-      border-top: 1px solid var(--border-color);
-      margin-top: 3rem;
-    }
-
-    @media (max-width: 768px) {
-      .header-section {
-        padding: 2rem 1rem;
-      }
-
-      .header-section h1 {
-        font-size: 2rem;
-      }
-
-      .search-section {
-        padding: 1.5rem;
-      }
-
-      .website-header {
-        flex-direction: column;
-        text-align: center;
-        gap: 0.5rem;
-      }
-
-      .theme-toggle {
-        top: 10px;
-        right: 10px;
-      }
-
-      .theme-btn {
-        width: 40px;
-        height: 40px;
-      }
-    }
-
-    .fade-in {
-      animation: fadeIn 0.5s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+    .dark ::-webkit-scrollbar-thumb {
+      background: #60a5fa;
     }
   </style>
 </head>
-<body data-theme="dark">
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300 min-h-screen">
   <!-- Theme Toggle -->
-  <div class="theme-toggle">
-    <button class="theme-btn" id="themeToggle" title="Toggle theme">
+  <div class="fixed top-6 right-6 z-50">
+    <button class="bg-primary-500 hover:bg-primary-600 dark:bg-primary-600 dark:hover:bg-primary-700 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg transition-all duration-300 hover:rotate-180" id="themeToggle" title="Toggle theme">
       <i class="fas fa-moon"></i>
     </button>
   </div>
 
-  <div class="container main-container py-4">
+  <div class="container mx-auto px-4 py-8 max-w-7xl">
     <!-- Header Section -->
-    <div class="header-section">
-      <h1><i class="fas fa-search me-3"></i>OmniScrape</h1>
-      <p class="subtitle">Multi-Website Search Tool</p>
+    <div class="bg-gradient-to-br from-primary-500 to-primary-700 text-white rounded-2xl p-8 mb-8 shadow-xl relative overflow-hidden">
+      <div class="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent"></div>
+      <div class="relative z-10 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">
+          <i class="fas fa-search mr-4"></i>OmniScrape
+        </h1>
+        <p class="text-xl md:text-2xl opacity-90">Multi-Website Search Tool</p>
+      </div>
     </div>
 
     <!-- Search Section -->
-    <div class="search-section fade-in">
-      <div class="row g-4">
-        <div class="col-12 col-md-6">
-          <label for="categorySelect" class="form-label">
-            <i class="fas fa-folder"></i>Category
+    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg mb-8 border border-gray-200 dark:border-gray-700 animate-fade-in">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="categorySelect" class="block text-sm font-semibold text-primary-600 dark:text-primary-400 mb-2">
+            <i class="fas fa-folder mr-2"></i>Category
           </label>
-          <select id="categorySelect" class="form-select">
+          <select id="categorySelect" class="w-full bg-gray-50 dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-800 transition-colors duration-300">
             <option value="all">All Categories</option>
           </select>
         </div>
-        <div class="col-12 col-md-6">
-          <label for="searchInput" class="form-label">
-            <i class="fas fa-search"></i>Search Term
+        <div>
+          <label for="searchInput" class="block text-sm font-semibold text-primary-600 dark:text-primary-400 mb-2">
+            <i class="fas fa-search mr-2"></i>Search Term
           </label>
-          <input type="text" class="form-control" id="searchInput" placeholder="Enter your search term..." />
+          <input type="text" id="searchInput" placeholder="Enter your search term..." 
+                 class="w-full bg-gray-50 dark:bg-gray-900 border-2 border-gray-300 dark:border-gray-600 text-gray-900 dark:text-white rounded-xl px-4 py-3 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:focus:ring-primary-800 transition-colors duration-300" />
         </div>
-        <div class="col-12">
-          <button id="searchButton" class="btn btn-primary-custom">
-            <i class="fas fa-search me-2"></i>Search Websites
+        <div class="md:col-span-2">
+          <button id="searchButton" class="w-full bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 px-6 rounded-xl transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center gap-2">
+            <i class="fas fa-search"></i>
+            Search Websites
           </button>
         </div>
       </div>
     </div>
 
     <!-- Stats Section -->
-    <div class="stats-section fade-in d-none" id="statsSection">
-      <div class="row text-center">
-        <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number" id="totalWebsites">0</div>
-            <div class="stat-label">Websites</div>
-          </div>
+    <div id="statsSection" class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg mb-8 border border-gray-200 dark:border-gray-700 hidden animate-fade-in">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+        <div class="p-4">
+          <div class="text-3xl font-bold text-primary-600 dark:text-primary-400" id="totalWebsites">0</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 uppercase tracking-wider mt-1">Websites</div>
         </div>
-        <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number" id="totalResults">0</div>
-            <div class="stat-label">Results</div>
-          </div>
+        <div class="p-4">
+          <div class="text-3xl font-bold text-primary-600 dark:text-primary-400" id="totalResults">0</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 uppercase tracking-wider mt-1">Results</div>
         </div>
-        <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number" id="successfulSearches">0</div>
-            <div class="stat-label">Successful</div>
-          </div>
+        <div class="p-4">
+          <div class="text-3xl font-bold text-green-600 dark:text-green-400" id="successfulSearches">0</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 uppercase tracking-wider mt-1">Successful</div>
         </div>
-        <div class="col-6 col-md-3">
-          <div class="stat-item">
-            <div class="stat-number" id="failedSearches">0</div>
-            <div class="stat-label">Failed</div>
-          </div>
+        <div class="p-4">
+          <div class="text-3xl font-bold text-red-600 dark:text-red-400" id="failedSearches">0</div>
+          <div class="text-sm text-gray-600 dark:text-gray-400 uppercase tracking-wider mt-1">Failed</div>
         </div>
       </div>
     </div>
 
     <!-- Loading Section -->
-    <div id="loading" class="loading-section d-none">
-      <div class="spinner-border spinner-custom" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <div class="loading-text">Searching websites...</div>
+    <div id="loading" class="hidden text-center py-12">
+      <div class="inline-block animate-spin rounded-full h-12 w-12 border-4 border-primary-500 border-t-transparent"></div>
+      <div class="mt-4 text-gray-600 dark:text-gray-400 text-lg">Searching websites...</div>
     </div>
 
     <!-- Results Section -->
-    <div id="results" class="results-section"></div>
+    <div id="results" class="space-y-6"></div>
 
     <!-- Footer -->
-    <footer class="footer-section">
-      <p class="mb-2">OmniScrape Multi-Search Tool</p>
-      <p class="mb-0 text-muted">© 2024 OshekharO | Uncoder.eu.org</p>
+    <footer class="mt-12 pt-8 border-t border-gray-200 dark:border-gray-700 text-center">
+      <p class="text-gray-600 dark:text-gray-400 mb-2">OmniScrape Multi-Search Tool</p>
+      <p class="text-gray-500 dark:text-gray-500 text-sm">© 2024 OshekharO | Uncoder.eu.org</p>
     </footer>
   </div>
 
@@ -501,16 +194,14 @@
     // Theme management
     function initTheme() {
       const savedTheme = localStorage.getItem('theme') || 'dark';
-      document.body.setAttribute('data-theme', savedTheme);
+      document.documentElement.classList.toggle('dark', savedTheme === 'dark');
       updateThemeIcon(savedTheme);
     }
 
     function toggleTheme() {
-      const currentTheme = document.body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-      document.body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-      updateThemeIcon(newTheme);
+      const isDark = document.documentElement.classList.toggle('dark');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      updateThemeIcon(isDark ? 'dark' : 'light');
     }
 
     function updateThemeIcon(theme) {
@@ -572,8 +263,8 @@
 
     function searchWebsites(searchTerm, category) {
       $("#results").empty();
-      $("#loading").removeClass("d-none");
-      $("#statsSection").addClass("d-none");
+      $("#loading").removeClass("hidden");
+      $("#statsSection").addClass("hidden");
 
       const categoriesToSearch = category === "all" ? Object.keys(websites) : [category];
       const promises = [];
@@ -627,9 +318,9 @@
         $('#totalResults').text(totalResults);
         $('#successfulSearches').text(successfulSearches);
         $('#failedSearches').text(failedSearches);
-        $('#statsSection').removeClass('d-none');
+        $('#statsSection').removeClass('hidden');
 
-        $("#loading").addClass("d-none");
+        $("#loading").addClass("hidden");
 
         if (totalResults === 0) {
           showAlert('No results found for your search term. Try a different keyword or category.', 'info');
@@ -682,13 +373,17 @@
       const container = $("#results");
       
       const websiteSection = $(`
-        <div class="website-results fade-in">
-          <div class="website-header">
-            <div class="website-icon">${website.name.charAt(0)}</div>
-            <h3 class="website-title">${website.name}</h3>
-            <span class="badge bg-primary ms-auto">${results.length} results</span>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 animate-fade-in">
+          <div class="flex items-center gap-4 mb-6 pb-4 border-b border-gray-200 dark:border-gray-700">
+            <div class="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-full flex items-center justify-center text-white font-bold text-lg">
+              ${website.name.charAt(0)}
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">${website.name}</h3>
+            <span class="ml-auto bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 px-3 py-1 rounded-full text-sm font-medium">
+              ${results.length} results
+            </span>
           </div>
-          <div class="row g-3" id="results-${website.name.replace(/\s+/g, '-')}"></div>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4" id="results-${website.name.replace(/\s+/g, '-')}"></div>
         </div>
       `);
 
@@ -696,25 +391,28 @@
 
       if (results.length === 0) {
         resultsContainer.html(`
-          <div class="col-12">
-            <div class="alert alert-warning alert-custom">
-              <i class="fas fa-exclamation-triangle me-2"></i>
-              No results found on ${website.name}
+          <div class="col-span-full">
+            <div class="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-xl p-4">
+              <div class="flex items-center">
+                <i class="fas fa-exclamation-triangle text-yellow-600 dark:text-yellow-400 mr-3"></i>
+                <span class="text-yellow-800 dark:text-yellow-200">No results found on ${website.name}</span>
+              </div>
             </div>
           </div>
         `);
       } else {
         results.forEach(result => {
           const col = $(`
-            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
-              <div class="result-card">
-                <div class="card-img-container">
-                  <img src="${result.img}" class="card-img" alt="${result.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400/2d2d2d/616370?text=Image+Error'">
+            <div class="group">
+              <div class="bg-gray-50 dark:bg-gray-900 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 transition-all duration-300 group-hover:shadow-lg group-hover:-translate-y-1 group-hover:border-primary-300 dark:group-hover:border-primary-600 h-full flex flex-col">
+                <div class="relative overflow-hidden h-48">
+                  <img src="${result.img}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105" alt="${result.title}" loading="lazy" onerror="this.src='https://via.placeholder.com/300x400/2d2d2d/616370?text=Image+Error'">
                 </div>
-                <div class="card-body-custom">
-                  <h5 class="card-title">${result.title}</h5>
-                  <a href="${result.href}" class="card-btn" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-external-link-alt me-2"></i>View
+                <div class="p-4 flex flex-col flex-grow">
+                  <h5 class="font-semibold text-gray-900 dark:text-white line-clamp-2 mb-3 flex-grow">${result.title}</h5>
+                  <a href="${result.href}" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-medium py-2 px-4 rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 shadow hover:shadow-md text-center flex items-center justify-center gap-2" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-external-link-alt text-sm"></i>
+                    View
                   </a>
                 </div>
               </div>
@@ -730,14 +428,18 @@
     function displayError(websiteName, error) {
       const container = $("#results");
       container.append(`
-        <div class="website-results fade-in">
-          <div class="website-header">
-            <div class="website-icon">!</div>
-            <h3 class="website-title">${websiteName}</h3>
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 animate-fade-in">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center text-red-600 dark:text-red-400 font-bold text-lg">
+              !
+            </div>
+            <h3 class="text-xl font-bold text-gray-900 dark:text-white">${websiteName}</h3>
           </div>
-          <div class="alert alert-danger alert-custom">
-            <i class="fas fa-exclamation-circle me-2"></i>
-            Failed to fetch results from ${websiteName}. The site might be temporarily unavailable.
+          <div class="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl p-4">
+            <div class="flex items-center">
+              <i class="fas fa-exclamation-circle text-red-600 dark:text-red-400 mr-3"></i>
+              <span class="text-red-800 dark:text-red-200">Failed to fetch results from ${websiteName}. The site might be temporarily unavailable.</span>
+            </div>
           </div>
         </div>
       `);
@@ -745,17 +447,28 @@
 
     function showAlert(message, type) {
       const alertClass = {
-        'success': 'alert-success',
-        'warning': 'alert-warning',
-        'danger': 'alert-danger',
-        'info': 'alert-info'
-      }[type] || 'alert-info';
+        'success': 'bg-green-50 border-green-200 dark:bg-green-900/20 dark:border-green-800 text-green-800 dark:text-green-200',
+        'warning': 'bg-yellow-50 border-yellow-200 dark:bg-yellow-900/20 dark:border-yellow-800 text-yellow-800 dark:text-yellow-200',
+        'danger': 'bg-red-50 border-red-200 dark:bg-red-900/20 dark:border-red-800 text-red-800 dark:text-red-200',
+        'info': 'bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800 text-blue-800 dark:text-blue-200'
+      }[type] || 'bg-blue-50 border-blue-200 dark:bg-blue-900/20 dark:border-blue-800 text-blue-800 dark:text-blue-200';
+
+      const iconClass = {
+        'success': 'fa-check-circle text-green-600 dark:text-green-400',
+        'warning': 'fa-exclamation-triangle text-yellow-600 dark:text-yellow-400',
+        'danger': 'fa-exclamation-circle text-red-600 dark:text-red-400',
+        'info': 'fa-info-circle text-blue-600 dark:text-blue-400'
+      }[type] || 'fa-info-circle text-blue-600 dark:text-blue-400';
 
       const alert = $(`
-        <div class="alert ${alertClass} alert-custom alert-dismissible fade show" role="alert">
-          <i class="fas fa-${getAlertIcon(type)} me-2"></i>
-          ${message}
-          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="alert"></button>
+        <div class="${alertClass} border rounded-xl p-4 mb-4 animate-fade-in flex items-center justify-between">
+          <div class="flex items-center">
+            <i class="fas ${iconClass} mr-3"></i>
+            <span>${message}</span>
+          </div>
+          <button type="button" class="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+            <i class="fas fa-times"></i>
+          </button>
         </div>
       `);
 
@@ -763,18 +476,17 @@
 
       // Auto-dismiss after 5 seconds
       setTimeout(() => {
-        alert.alert('close');
+        alert.fadeOut(300, function() {
+          $(this).remove();
+        });
       }, 5000);
-    }
 
-    function getAlertIcon(type) {
-      const icons = {
-        'success': 'check-circle',
-        'warning': 'exclamation-triangle',
-        'danger': 'exclamation-circle',
-        'info': 'info-circle'
-      };
-      return icons[type] || 'info-circle';
+      // Manual dismiss
+      alert.find('button').click(function() {
+        alert.fadeOut(300, function() {
+          $(this).remove();
+        });
+      });
     }
   </script>
 </body>
