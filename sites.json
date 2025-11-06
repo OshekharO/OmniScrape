@@ -20,10 +20,10 @@
     },
     "FilmyHub": {
       "name": "FilmyHub",
-      "baseUrl": "https://afilmyhub.mom",
-      "url": "https://afilmyhub.mom/site-search.html?to-search=",
+      "baseUrl": "https://filmyhub.wiki",
+      "url": "https://filmyhub.wiki/?s=",
       "main": "div.container article.post",
-      "title": "h3 a",
+      "title": "h2 a",
       "img": "img[src]",
       "href": "a[href]"
     }
