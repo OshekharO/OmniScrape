@@ -2,8 +2,8 @@
   "movies": {
     "PRMovies": {
       "name": "PRMovies",
-      "baseUrl": "https://prmovies.fitness",
-      "url": "https://prmovies.fitness/?s=",
+      "baseUrl": "https://prmovies.sale",
+      "url": "https://prmovies.sale/?s=",
       "main": "div.movies-list div.ml-item",
       "title": "h2",
       "img": "a img[src]",
