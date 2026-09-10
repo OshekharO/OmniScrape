@@ -269,6 +269,9 @@
       const categoriesToSearch = category === "all" ? Object.keys(websites) : [category];
       const promises = [];
       let totalWebsites = 0;
+      let totalResults = 0;
+      let successfulSearches = 0;
+      let failedSearches = 0;
 
       categoriesToSearch.forEach(cat => {
         Object.values(websites[cat]).forEach(website => {
@@ -276,50 +279,46 @@
           const searchUrl = website.url + encodeURIComponent(searchTerm);
           const bypassUrl = corsBypassUrl + encodeURIComponent(searchUrl);
 
+          // ⚡ Bolt Optimization: Stream/render results progressively as each request resolves
+          // rather than waiting for all network requests (Promise.allSettled) to finish.
           const request = $.ajax({ 
             url: bypassUrl, 
             method: "GET",
             timeout: 10000
           })
-            .then(data => ({ website, data, success: true }))
-            .catch(err => ({ website, data: null, error: err, success: false }));
+            .then(data => {
+              successfulSearches++;
+              const parsedResults = parseResults(data, website);
+              totalResults += parsedResults.length;
+              displayResults(website, parsedResults);
+              updateStats();
+              return { website, success: true };
+            })
+            .catch(err => {
+              failedSearches++;
+              displayError(website.name, err);
+              updateStats();
+              return { website, success: false, error: err };
+            });
 
           promises.push(request);
         });
       });
 
-      // Update stats
+      // Update initial website count and reveal stats section progressively
       $('#totalWebsites').text(totalWebsites);
+      $('#totalResults').text(0);
+      $('#successfulSearches').text(0);
+      $('#failedSearches').text(0);
+      $('#statsSection').removeClass('hidden');
 
-      Promise.allSettled(promises).then(results => {
-        let totalResults = 0;
-        let successfulSearches = 0;
-        let failedSearches = 0;
-
-        results.forEach(result => {
-          if (result.status === 'fulfilled') {
-            const res = result.value;
-            if (res.success && res.data) {
-              successfulSearches++;
-              const parsedResults = parseResults(res.data, res.website);
-              totalResults += parsedResults.length;
-              displayResults(res.website, parsedResults);
-            } else {
-              failedSearches++;
-              displayError(res.website.name, res.error);
-            }
-          } else {
-            failedSearches++;
-            displayError('Unknown website', result.reason);
-          }
-        });
-
-        // Update stats
+      function updateStats() {
         $('#totalResults').text(totalResults);
         $('#successfulSearches').text(successfulSearches);
         $('#failedSearches').text(failedSearches);
-        $('#statsSection').removeClass('hidden');
+      }
 
+      Promise.allSettled(promises).then(() => {
         $("#loading").addClass("hidden");
 
         if (totalResults === 0) {
